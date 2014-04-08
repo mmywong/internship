@@ -1,25 +1,7 @@
 #include <iostream>
+#include "propertytype.h"
 
 using namespace std;
-
-template<class T>
-void get(T propertyname) // prints out current value
-{
-    cout << propertyname;
-}
-
-template<class T>
-void set(T propertyname, T newvalue)
-{
-    propertyname = newvalue;
-}
-
-template<class T>
-void printall(T propertyname)
-{
-    while(propertyname)
-        cout << propertyname;
-}
 
 int main()
 {
