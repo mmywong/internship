@@ -1,6 +1,10 @@
 #include <iostream>
+<<<<<<< HEAD
 #include <stdio.h>
 #include <string.h>
+=======
+#include "propertytype.h"
+>>>>>>> 8bb5efe39213e855a6ad0d3af3bb0d982fbbe385
 
 using namespace std;
 
@@ -8,12 +12,19 @@ void Process(string input);
 
 int main()
 {
+<<<<<<< HEAD
     string input;
+=======
+    istream input;
+>>>>>>> 8bb5efe39213e855a6ad0d3af3bb0d982fbbe385
 
     cout << "#--------Command Menu--------#" << endl;
     cout << "SET : Change value" << endl;
     cout << "GET : Output value" << endl;
+<<<<<<< HEAD
     cout << "GET* : Output list of values" << endl;
+=======
+>>>>>>> 8bb5efe39213e855a6ad0d3af3bb0d982fbbe385
 
     string command;
     char assign; // equals sign
@@ -21,11 +32,30 @@ int main()
 
     input >> command >> propertyname >> assign >> newvalue;
 
+<<<<<<< HEAD
 
+=======
+    switch(command)
+    {
+        case 'SET':
+            set(propertyname, newvalue);
+            break;
+        case 'GET':
+            get(propertyname);
+            break;
+        case 'GET *':
+            printall(propertyname);
+            break;
+        default:
+            cout << "command does not exist" << endl;
+            break;
+    }
+>>>>>>> 8bb5efe39213e855a6ad0d3af3bb0d982fbbe385
 
     return 0;
 }
 
+<<<<<<< HEAD
 void Process(string input)
 {
     char* command, propertyname, newvalue, type;
@@ -93,4 +123,7 @@ void Process(string input)
          propertyname++; // as long as ++ operator is defined, it will move to print out the next item in the list?
      }
  }
+=======
+
+>>>>>>> 8bb5efe39213e855a6ad0d3af3bb0d982fbbe385
 
