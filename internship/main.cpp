@@ -2,8 +2,6 @@
 
 using namespace std;
 
-void Process(istream input); // fx that reads input and decides which function to call
-
 template<class T>
 void get(T propertyname) // prints out current value
 {
@@ -13,32 +11,29 @@ void get(T propertyname) // prints out current value
 template<class T>
 void set(T propertyname, T newvalue)
 {
+    propertyname = newvalue;
+}
 
+template<class T>
+void printall(T propertyname)
+{
+    while(propertyname)
+        cout << propertyname;
 }
 
 int main()
 {
-    string input;
+    istream input;
 
     cout << "#--------Command Menu--------#" << endl;
     cout << "SET : Change value" << endl;
     cout << "GET : Output value" << endl;
 
-    cin >> input;
-
-    Process(input);
-
-    return 0;
-}
-
-template<class T>
-void Process(istream input)
-{
     string command;
     char assign; // equals sign
     T propertyname,newvalue; // two variables of same typename
 
-    in >> command >> propertyname >> assign >> newvalue;
+    input >> command >> propertyname >> assign >> newvalue;
 
     switch(command)
     {
@@ -55,4 +50,9 @@ void Process(istream input)
             cout << "command does not exist" << endl;
             break;
     }
+
+    return 0;
 }
+
+
+
