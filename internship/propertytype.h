@@ -1,14 +1,14 @@
 #ifndef PROPERTYTYPE_H
 #define PROPERTYTYPE_H
+#include <iostream>
+#include <stdio.h>
+#include <string.h>
 
 template<class T>
-class propertytype
+struct propertytype
 {
-public:
-    propertytype();
-    void get(T propertyname);
-    void set(T propertyname, T newvalue);
-    void printall(T propertyname);
+    string propertyname;
+    T object;
 };
 
 #endif // PROPERTYTYPE_H

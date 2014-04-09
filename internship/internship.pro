@@ -5,8 +5,7 @@ CONFIG -= qt
 
 SOURCES += main.cpp
 
-HEADERS += \
-    propertytype.h
+HEADERS +=
 
 HEADERS +=
 

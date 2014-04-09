@@ -1,10 +1,17 @@
 #include <iostream>
-#include <stdio.h>
-#include <string.h>
+#include "propertytype.h"
 
 using namespace std;
 
 void Process(string input);
+
+template<class T>
+struct propertytype
+{
+public:
+    string propertyname;
+    T object;
+};
 
 int main()
 {
@@ -14,13 +21,9 @@ int main()
     cout << "SET : Change value" << endl;
     cout << "GET : Output value" << endl;
     cout << "GET* : Output list of values" << endl;
-
-    string command;
-    char assign; // equals sign
-    T propertyname,newvalue; // two variables of same typename
-
-    input >> command >> propertyname >> assign >> newvalue;
-
+    cout << ">>";
+    cin >> input;
+    Process(input);
 
 
     return 0;
