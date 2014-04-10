@@ -4,20 +4,31 @@
 
 using namespace std;
 
+void whattype(char* newvalue)
+{
+    if(*newvalue > 48)
+        cout << "character" << endl;
+    else if(*newvalue < 48)
+        cout << "num" << endl;
+
+    //check if double
+    char* walker = newvalue;
+    while(walker != '\0')
+    {
+        if(*walker == ".")
+            cout << "double" << endl;
+        walker++;
+    }
+}
+void set(char* propertyname, char* newvalue);
+
 void Process(string input);
-//int FindBanned(char *banned, char *wholeline); //finds position of banned characters in wholeline
-//int StrLen(char *iPtr); //finds length of pointer array
 
 int main()
 {
     string input = "set property = value";
     Process(input);
 
-//    char* banned, wholeline;
-//    string bans, sentence;
-//    bans = " =";
-//    sentence = "test value = 5";
-//    banned.c_str();
     return 0;
 }
 
@@ -51,9 +62,10 @@ void Process(string input)
     propertyname = A[1]; //collects to read propertyname
 
     //find out which command was typed in and call the appropriate function
-    if(*command == "SET")
+    //***BUG***// : cannot compare string
+    if(toupper(*command) == "SET")
     {
-        cout << "set();" << endl;
+        cout << "set(propertyname, newvalue);" << endl;
         newvalue = A[2];
     }
     else if(toupper(*command) == 'GET')
