@@ -1,22 +1,41 @@
 #include <iostream>
-#include "propertytype.h"
 
 using namespace std;
 
 void Process(string input);
 
-template<class T>
+template<class T> // to accomodate for any type of object
 struct propertytype
 {
-public:
-    string propertyname;
+    string name;
     T object;
 };
+
+struct Data {
+    string variable;
+    string value;
+};
+
+Data& Search(const string &token, Data* database)
+{
+    //this look for the correct data to return
+    while(database) {
+        if(token == *database)
+            return database;
+        database++;
+    }
+    return NULL;
+}
+
+bool isNUMBER(const string &token) {
+    int loop = 0;
+    while(token[])
+}
 
 int main()
 {
     string input;
-
+    cin.get()
     cout << "#--------Command Menu--------#" << endl;
     cout << "SET : Change value" << endl;
     cout << "GET : Output value" << endl;
@@ -69,32 +88,29 @@ void Process(string input)
     }
 }
 
+template<class T>
+void set(char* propertyname, char* newvalue)
+{
+     object1, object2;
+    object1. = propertyname;
 
+}
 
+template<class T>
+void get(T propertyname) // prints out current value
+{
+    cout << propertyname;
+}
 
+template<class T>
+void getall(T propertyname) // prints out list of all members
+{
+    //how will we take into account of any object? for c-string, we use '\0' as marker. for array, also use '\0'
+    while(propertyname) // while it's not null or null character
+    {
+        cout << propertyname;
+        propertyname++; // as long as ++ operator is defined, it will move to print out the next item in the list?
+    }
+}
 
-/*
- template<class T>
- void set(T propertyname, T newvalue)
- {
-     propertyname = newvalue;
- }
-
- template<class T>
- void get(T propertyname) // prints out current value
- {
-     cout << propertyname;
- }
-
-
- template<class T>
- void getall(T propertyname) // prints out list of all members
- {
-     //how will we take into account of any object? for c-string, we use '\0' as marker. for array, also use '\0'
-     while(propertyname) // while it's not null or null character
-     {
-         cout << propertyname;
-         propertyname++; // as long as ++ operator is defined, it will move to print out the next item in the list?
-     }
- }
 
