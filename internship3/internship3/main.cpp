@@ -1,6 +1,7 @@
 #include <iostream>
 #include <cstring>
 #include <string>
+#include "../../../CS3A/stringlibrary/stringfx.h"
 
 using namespace std;
 
@@ -15,7 +16,7 @@ void whattype(char* newvalue)
     char* walker = newvalue;
     while(walker != '\0')
     {
-        if(*walker == ".")
+        if(Find('.', walker, 0) != -1) //*walker == "." is found
             cout << "double" << endl;
         walker++;
     }
@@ -26,7 +27,7 @@ void Process(string input);
 
 int main()
 {
-    string input = "set property = value";
+    string input = "get* property = value";
     Process(input);
 
     return 0;
@@ -51,29 +52,32 @@ void Process(string input)
       p = strtok(NULL," =");
       i++;
     }
-    delete[] in;
-
     //each element in the array is now a string pointed by a char*
-    char* command;
-    char* propertyname;
-    char* newvalue;
+//    char* command;
+//    char* propertyname;
+//    char* newvalue;
 
-    command = A[0]; //collects to read GET/SET/GET*
-    propertyname = A[1]; //collects to read propertyname
+//    command = A[0]; //collects to read GET/SET/GET*
+//    propertyname = A[1]; //collects to read propertyname
 
     //find out which command was typed in and call the appropriate function
     //***BUG***// : cannot compare string
-    if(toupper(*command) == "SET")
+//    cout << "find string status: " << FindStr("SET", command, 0)<< endl;
+//    cout << "command : " << *command << endl;
+    cout << "A[0] : " << A[0] << endl;
+    if(FindStr("SET", A[0], 0) != -1) // "SET" is found in command
     {
         cout << "set(propertyname, newvalue);" << endl;
-        newvalue = A[2];
+//        newvalue = A[2];
     }
-    else if(toupper(*command) == 'GET')
-        cout << "get();" << endl;
-    else if(toupper(*command) == 'GET*')
+    else if(FindStr("GET*", A[0], 0) != -1)
         cout << "getall();" << endl;
+    else if(FindStr("GET", A[0], 0) != -1)
+        cout << "get();" << endl;
     else
         cout << "command does not exist" << endl;
+
+    delete[] in;
 }
 
 

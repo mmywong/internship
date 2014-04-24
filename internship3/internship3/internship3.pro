@@ -5,3 +5,6 @@ CONFIG -= qt
 
 SOURCES += main.cpp
 
+HEADERS += \
+    ../../../CS3A/stringlibrary/stringfx.h
+
