@@ -23,7 +23,7 @@ void whattype(char* newvalue)
 }
 void set(char* propertyname, char* newvalue);
 
-void Process(string input);
+void Process(string input);      //temp comment
 
 int main()
 {
