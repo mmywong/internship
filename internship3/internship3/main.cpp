@@ -5,29 +5,13 @@
 
 using namespace std;
 
-void whattype(char* newvalue)
-{
-    if(*newvalue > 48)
-        cout << "character" << endl;
-    else if(*newvalue < 48)
-        cout << "num" << endl;
-
-    //check if double
-    char* walker = newvalue;
-    while(walker != '\0')
-    {
-        if(Find('.', walker, 0) != -1) //*walker == "." is found
-            cout << "double" << endl;
-        walker++;
-    }
-}
+void whattype(char* newvalue);
 void set(char* propertyname, char* newvalue);
-
-void Process(string input);      //temp comment
+void Process(string input);
 
 int main()
 {
-    string input = "get* property = value";
+    string input = "GET property = value";
     Process(input);
 
     return 0;
@@ -65,19 +49,21 @@ void Process(string input)
 //    cout << "find string status: " << FindStr("SET", command, 0)<< endl;
 //    cout << "command : " << *command << endl;
     cout << "A[0] : " << A[0] << endl;
-    if(FindStr("SET", A[0], 0) != -1) // "SET" is found in command
+    if((FindStr("SET", A[0], 0) != -1) || (FindStr("set", A[0],0) != -1)) // "SET" is found in command
     {
         cout << "set(propertyname, newvalue);" << endl;
 //        newvalue = A[2];
     }
-    else if(FindStr("GET*", A[0], 0) != -1)
+    else if((FindStr("GET*", A[0], 0) != -1) || (FindStr("get*", A[0], 0)!= -1))
         cout << "getall();" << endl;
-    else if(FindStr("GET", A[0], 0) != -1)
+    else if((FindStr("GET", A[0], 0) != -1) || (FindStr("get", A[0], 0) != -1))
         cout << "get();" << endl;
     else
         cout << "command does not exist" << endl;
 
     delete[] in;
+
+
 }
 
 
@@ -111,3 +97,20 @@ int StrLen(char *iPtr)
     return index;
 }
 */
+
+void whattype(char* newvalue)
+{
+    if(*newvalue > 48)
+        cout << "character" << endl;
+    else if(*newvalue < 48)
+        cout << "num" << endl;
+
+    //check if double
+    char* walker = newvalue;
+    while(walker != '\0')
+    {
+        if(Find('.', walker, 0) != -1) //*walker == "." is found
+            cout << "double" << endl;
+        walker++;
+    }
+}
