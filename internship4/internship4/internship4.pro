@@ -9,5 +9,6 @@ HEADERS += \
     iterator.h \
     stringfx.h \
     node.h \
-    list.h
+    list.h \
+    data.h
 

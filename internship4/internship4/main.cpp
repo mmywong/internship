@@ -6,28 +6,37 @@
 #include "list.h"
 #include "node.h"
 #include "stringfx.h"
+#include "data.h"
 
 using namespace std;
 
-int whattype(char* newvalue);
-void set(char* propertyname, char* newvalue);
-void Process(string input);
+int whattype(char* newvalue); //detect int/char/string
+void Process(list<data> database, string input); //take apart input into tokens
+void set(list<data> database, char* propertyname, char* newvalue);
 
 int main()
 {
-    string input = "GET property = value";
-    Process(input);
-    int type;
-    char* testptr = "/";
-    cout << "what is testptr? it is a : ";
-    type = whattype(testptr);
-    cout << type;
+    data newdata;
+    newdata.propertyname = "ramen";
+    newdata.type = 1;
+    newdata.value = "10";
+
+    list<data> database;
+    string input;
+    cout << ": ";
+    cin >> input;
+    cout << endl << endl;
+
+    Process(database, input);
+
+    cout << "database : " << endl;
+    database.Print();
     cout << endl << endl;
 
     return 0;
 }
 
-void Process(string input)
+void Process(list<data> database, string input)
 {
     //convert input from string to char*
     char * in = new char [input.length()+1];
@@ -46,23 +55,12 @@ void Process(string input)
       p = strtok(NULL," =");
       i++;
     }
-    //each element in the array is now a string pointed by a char*
-//    char* command;
-//    char* propertyname;
-//    char* newvalue;
 
-//    command = A[0]; //collects to read GET/SET/GET*
-//    propertyname = A[1]; //collects to read propertyname
-
-    //find out which command was typed in and call the appropriate function
-    //***BUG***// : cannot compare string
-//    cout << "find string status: " << FindStr("SET", command, 0)<< endl;
-//    cout << "command : " << *command << endl;
     cout << "A[0] : " << A[0] << endl;
     if((FindStr("SET", A[0], 0) != -1) || (FindStr("set", A[0],0) != -1)) // "SET" is found in command
     {
-        cout << "set(propertyname, newvalue);" << endl;
-//        newvalue = A[2];
+        cout << "set(database, name, newvalue);" << endl;
+        set(database, A[1], A[2]);
     }
     else if((FindStr("GET*", A[0], 0) != -1) || (FindStr("get*", A[0], 0)!= -1))
         cout << "getall();" << endl;
@@ -70,43 +68,31 @@ void Process(string input)
         cout << "get();" << endl;
     else
         cout << "command does not exist" << endl;
-
     delete[] in;
-
-
 }
 
 
-
-
-
-
-/*
-int FindBanned(char *banned, char *wholeline) // finds banned characters in wholeline
+void set(list<data> database, char* propertyname, char* newvalue)
 {
-    char *walker;
-    walker = wholeline;
-    for(int i=0; i<StrLen(banned); i++)
+    data newdata;
+    newdata.propertyname = propertyname;
+    newdata.type = whattype(newvalue);
+    newdata.value = newvalue;
+
+    //case 1: empty list
+    if(database.isEmpty() == true)
+        database.InsertHead(newdata);
+    //case 2: name exists. search for it and set its value
+    else if(database.Search(newdata) != -1) // found
     {
-        for(int j=0; j<StrLen(wholeline); j++)
-        {
-            if(*walker == *banned)
-                return j; // returns position of the banned character
-            walker++;
-        }
-        banned++;
+        Iterator<data> positionfound = database.Ithnode(database.Search(newdata));
+        database.InsertBefore(positionfound,newdata);
+        database.Delete(positionfound);
     }
-    return -1; // these "banned" characters are not found
+    //case 3: name does not exist. add this new item
+    else
+        database.Append(newdata);
 }
-
-int StrLen(char *iPtr)
-{
-    int index = 0;
-    while (*(iPtr+index) != '\0')
-         index++;
-    return index;
-}
-*/
 
 int whattype(char* newvalue)
 {
@@ -116,7 +102,7 @@ int whattype(char* newvalue)
     //3 : double
     //4 : other
 
-    //check if double
+    //check if double :
     char* temp;
     temp = newvalue;
     while(*temp != '\0')
@@ -126,10 +112,13 @@ int whattype(char* newvalue)
         else
             temp++;
     }
-    if(((*newvalue >= 65) && (*newvalue <91)) || ((*newvalue >= 97)&& (*newvalue < 123))) //ASCII
-        return 2;
-    else if((*newvalue >= 48) && (*newvalue < 58))
-        return 1;
 
+    //check if char/string :
+    if(((*newvalue >= 65) && (*newvalue <91)) || ((*newvalue >= 97) && (*newvalue < 123))) //ASCII
+        return 2;
+    //check if int :
+    else if((*newvalue >= 48) && (*newvalue < 58)) // ASCII
+        return 1;
+    //everything else :
     return 4;
 }

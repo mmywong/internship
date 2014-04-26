@@ -1,6 +1,7 @@
 #ifndef LIST_H
 #define LIST_H
 #include "iterator.h"
+#include "data.h"
 #include <iostream>
 
 using namespace std;
@@ -34,10 +35,6 @@ public:
     //---change---//
     T &operator []                  (int index);
 
-    //---sort---//
-//    void InsertSorted               (int num);
-//    void Sort                       ();
-
     //---new lists---//
     void Reverse                    ();
 
@@ -46,21 +43,14 @@ public:
     Iterator<T> End                    ();
     Iterator<T> Ithnode                (int i);
     int IthElement                     (); // returns the item of IthNode
-//    Iterator Previous               ();
     bool isEmpty                        ();
 
 private:
-    //---node ---//
-    //public fx should not have node* everywhere
-    //private fx can have node* because user has no access
-    //use these node* in private to write public functions
     void InsertAfter                (node<T>* marker, T num); // makes a node to the right of marker's node
     void InsertBefore               (node<T>* marker, T num); // makes a node to the left of marker's node
     T Delete                        (node<T>* marker);
     node<T>* Remove                 (node<T>* marker);
     node<T>* nEnd                   ();
-    //node* WhereThisGoes(int i);
-
 
     node<T>* head;
 };
@@ -91,9 +81,6 @@ list<T>::list(list<T> &copythis)
     }
 }
 
-//memory leak. what if A is not empty / contains nodes which haven't been deleted
-// delete extra nodes. e.g. 4nodes = 5 nodes.
-//problem : only reassigned the head. what about the floating nodes we don't have access to?
 template <class T>
 const list<T> &list<T>::operator =(list<T> &right)
 {
@@ -118,16 +105,6 @@ list<T>::~list()
         Delete(head);
     }
     head = NULL;
-    /*
-     node<T>* marker = nEnd();
-     while(marker != head)
-     {
-         delete marker;
-         marker = nEnd();
-     }
-     delete marker;
-     head = NULL;
-    */
 }
 
 //---create---//
@@ -180,11 +157,11 @@ node<T>* list<T>::Remove(node<T> *marker)
 {
     node<T>* walker = head;
 
-    if(marker == head) // case that you want to remove head
+    if(marker == head) // case: want to remove head
         head = head->next;
-    else // case that you want to remove something from pos 1 onwards
+    else // case: want to remove something from pos 1 onwards
     {
-        while(walker->next != marker && walker->next != NULL) // finds the position before marker
+        while(walker->next != marker && walker->next != NULL) // finds position before marker
             walker = walker->next;
         walker->next = marker->next; // makes the previous point at the node after marker
     }
@@ -201,7 +178,7 @@ T list<T>::Delete(Iterator<T> marker)
 template <class T>
 T list<T>::Delete(node<T> *marker)
 {
-    int temp = marker->item;
+    T temp = marker->item;
     delete Remove(marker);
     return temp;
 }
@@ -218,7 +195,7 @@ int list<T>::Search(T key)
     }
     if(marker == NULL)
         return -1; // not found
-    return pos; // if item is found
+    return pos; // found
 }
 
 //---show---//
@@ -228,20 +205,15 @@ void list<T>::Print() const
     node<T>* walker = head;
     while(walker != NULL)
     {
-        cout<<"["<<walker->item<<"]-->";
+        cout<<"["<<walker->item<<"]  ";
         walker = walker->next;
     }
-    cout << "||||";
 }
 
 template <class T>
 T &list<T>::operator [](int index)
 {
     return Ithnode(index).nodeptr->item;
-    /* is the same as doing this :
-    Iterator temp = Ithnode(index);
-    return temp.nodeptr->item;
-    */
 }
 
 template <class T>
@@ -327,15 +299,5 @@ void list<T>::InsertBefore(node<T> *marker, T num)
         walker->next = temp;
     }
 }
-
-/*
-template <class T>
-Iterator list<T>::WhereThisGoes(int i)
-{
-    node<T>* marker = head;
-    while((marker != NULL) && (i < marker->item))
-        marker = marker->next;
-}*/
-
 
 #endif // LIST_H
