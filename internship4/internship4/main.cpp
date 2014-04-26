@@ -1,11 +1,11 @@
 #include <iostream>
 #include <cstring>
 #include <string>
-#include <iterator>
-#include <list>
 
-
-#include "../../../CS3A/stringlibrary/stringfx.h"
+#include "iterator.h"
+#include "list.h"
+#include "node.h"
+#include "stringfx.h"
 
 using namespace std;
 
@@ -15,18 +15,10 @@ void Process(string input);
 
 int main()
 {
-    list<string> StringLord;
-    StringLord.push_front(string("lalalalal"));
-
-    iterator<string> stringwalker;
-    stringwalker = StringLord.begin();
-
-    cout << *stringwalker << endl;
-
     string input = "GET property = value";
     Process(input);
     int type;
-    char* testptr = "abcd";
+    char* testptr = "/";
     cout << "what is testptr? it is a : ";
     type = whattype(testptr);
     cout << type;
@@ -125,13 +117,14 @@ int whattype(char* newvalue)
     //4 : other
 
     //check if double
-    char* walker = newvalue;
-    while(walker != '\0')
+    char* temp;
+    temp = newvalue;
+    while(*temp != '\0')
     {
-        if(Find('.', walker, 0) != -1) //*walker == "." is found
+        if(Find('.', temp, 0) != -1) //*walker == "." is found
            return 3;
         else
-           walker++;
+            temp++;
     }
     if(((*newvalue >= 65) && (*newvalue <91)) || ((*newvalue >= 97)&& (*newvalue < 123))) //ASCII
         return 2;
