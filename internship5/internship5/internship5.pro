@@ -5,3 +5,10 @@ CONFIG -= qt
 
 SOURCES += main.cpp
 
+HEADERS += \
+    data.h \
+    iterator.h \
+    list.h \
+    node.h \
+    stringfx.h
+
