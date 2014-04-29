@@ -15,22 +15,14 @@ void Process(string input);
 
 int main()
 {
-    list<string> StringLord;
-    StringLord.push_front(string("lalalalal"));
-
-    iterator<string> stringwalker;
-    stringwalker = StringLord.begin();
-
-    cout << *stringwalker << endl;
-
     string input = "GET property = value";
     Process(input);
-    int type;
-    char* testptr = "abcd";
-    cout << "what is testptr? it is a : ";
-    type = whattype(testptr);
-    cout << type;
-    cout << endl << endl;
+//    int type;
+//    char* testptr = "abcd";
+//    cout << "what is testptr? it is a : ";
+//    type = whattype(testptr);
+//    cout << type;
+//    cout << endl << endl;
 
     return 0;
 }
