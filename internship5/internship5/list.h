@@ -166,13 +166,14 @@ node<T>* list<T>::Remove(node<T> *marker)
         walker->next = marker->next; // makes the previous point at the node after marker
     }
     marker->next = NULL;
+    cout << "Inside Remove function, this is value of item being removed : " << marker->item << endl;
     return marker;
 }
 
 template <class T>
 T list<T>::Delete(Iterator<T> marker)
 {
-    Delete(marker.nodeptr);
+    return Delete(marker.nodeptr);
 }
 
 template <class T>
@@ -188,10 +189,6 @@ int list<T>::Search(T key)
 {
     int pos = 0;
     node<T>* marker = head;
-    cout << "marker-> item : " << marker->item << endl;
-    cout << "key : " << key << endl;
-    cout << "is item == key?" << (marker->item==key )<< endl;
-    cout << "is item != key?" << (marker->item != key) << endl;
     while((marker != NULL) && (marker->item != key))
     {
         marker = marker->next;

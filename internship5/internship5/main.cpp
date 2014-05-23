@@ -107,7 +107,13 @@ void set(list<data> database, char* propertyname, char* newvalue)
         database.InsertBefore(positionfound,newdata);
         cout << "database now (2) : ";
         database.Print();
-        database.Delete(positionfound);
+        cout << "what iterator is pointing at now : " << *positionfound << endl;
+
+        //***DEBUG***//
+        data tester;
+        tester = database.Delete(positionfound);
+        cout << "tester : " << tester << endl;
+        database.Print();
     }
     //case 3: name does not exist. add this new item
     else
