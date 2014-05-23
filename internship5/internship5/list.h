@@ -203,6 +203,8 @@ template <class T>
 void list<T>::Print() const
 {
     node<T>* walker = head;
+    if(walker == NULL)
+        cout << "-empty-";
     while(walker != NULL)
     {
         cout<<"["<<walker->item<<"]  ";

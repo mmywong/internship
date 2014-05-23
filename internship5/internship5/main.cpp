@@ -31,11 +31,10 @@ int main()
     char* input;
     cout << ":";
     cin.getline(input, 50);
-    cout << "input : " << input << endl;
 
     Process(database, input);
 
-    cout << "new database : ";
+    cout << "new database : " << endl;
     database.Print();
     cout << endl << endl;
 
@@ -55,7 +54,6 @@ void Process(list<data>& database, char* input)
     while (p != NULL)
         {
           A[i] = p;
-          cout << "token " << i << " : " << A[i] << endl;
           p = strtok(NULL," =");
           i++;
         }
@@ -75,7 +73,7 @@ void Process(list<data>& database, char* input)
     else if((FindStr("GET", A[0], 0) != -1) || (FindStr("get", A[0], 0) != -1))
         cout << "get();" << endl;
     else
-        cout << "command does not exist" << endl;
+        cout << "error : command does not exist" << endl;
 //    delete[] in;
 }
 
@@ -86,47 +84,56 @@ void set(list<data> &database, char* propertyname, char* newvalue)
     newdata.propertyname = propertyname;
     newdata.type = whattype(newvalue);
     newdata.value = newvalue;
-    cout << "new data : " << newdata << endl;
+//    cout << "new data : " << newdata << endl;
     //case 1: empty list
     if(database.isEmpty() == true)
     {
         database.InsertHead(newdata);
-        cout << "database empty" << endl;
     }
     //case 2: name exists. search for it and set its value
     else if(database.Search(newdata) != -1) // found
     {
         Iterator<data> positionfound = database.Ithnode(database.Search(newdata));
+        //case : input type is incompatible (e.g. int set to string)
+        if(newdata.type != (*positionfound).type)
+            cout << "error : input value is incompatible" << endl;
+        else
+        {
 
-        //debug
-        cout << "what iterator(of search result) is pointing at : " << *positionfound << endl;
-        cout << "database before : ";
-        database.Print();
-        cout << endl;
+            /***DEBUG***
+            cout << "what iterator(of search result) is pointing at : " << *positionfound << endl;
+            cout << "database before : ";
+            database.Print();
+            cout << endl;
+            */
 
-        database.InsertBefore(positionfound,newdata);
+            database.InsertBefore(positionfound,newdata);
 
-        //debug
-        cout << "database after insert: ";
-        database.Print();
-        cout << endl;
-//        cout << "what search-iterator is poiting at: " << *positionfound << endl;
+            /***DEBUG***
+            cout << "database after insert: ";
+            database.Print();
+            cout << endl;
+            cout << "what search-iterator is poiting at: " << *positionfound << endl;
+            */
 
-        database.Delete(positionfound);
-        cout << "database after delete : ";
-        database.Print();
-        cout << endl;
-        //***DEBUG***//
-//        data tester;
-//        tester = database.Delete(positionfound);
-//        cout << "tester : " << tester << endl;
-//        database.Print();
+            database.Delete(positionfound);
+
+            /***DEBUG***
+            cout << "database after delete : ";
+            database.Print();
+            cout << endl;
+
+            data tester;
+            tester = database.Delete(positionfound);
+            cout << "tester : " << tester << endl;
+            database.Print();
+            */
+        }
     }
     //case 3: name does not exist. add this new item
     else
     {
         database.Append(newdata);
-        cout << "supposed to append" << endl;
     }
 }
 
