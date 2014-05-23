@@ -42,6 +42,7 @@ int StrCmp(char *Ptr1, char *Ptr2) //compares two strings. returns 0 if they are
             return -1;
 
     }while(*Ptr1 != NULL || *Ptr2 != NULL);
+    return 0;
 }
 
 void StrCat(char *&dest, char *source)//concatenates one string to the end of the other. puts source behind dest

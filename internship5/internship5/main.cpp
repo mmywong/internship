@@ -18,34 +18,34 @@ void getall(list<data> database);
 
 int main()
 {
-    data newdata;
-    newdata.propertyname = "ramen";
-    newdata.type = 1;
-    newdata.value = "3";
+//    data newdata;
+//    newdata.propertyname = "ramen";
+//    newdata.type = 1;
+//    newdata.value = "3";
 
-    data newdata2;
-    newdata2.propertyname = "miso";
-    newdata2.type = 2;
-    newdata2.value = "spicy";
+//    data newdata2;
+//    newdata2.propertyname = "miso";
+//    newdata2.type = 2;
+//    newdata2.value = "spicy";
 
     list<data> database;
-    database.InsertHead(newdata);
-    database.Append(newdata2);
-    cout << "current database: " << endl;
-    database.Print();
-
-    cout << endl << endl<< "=======================" << endl << endl;
-
     char* input;
+    input = NULL;
     cout << ":";
     cin.getline(input, 50);
 
-    Process(database, input);
+//    database.InsertHead(newdata);
+//    database.Append(newdata2);
+//    cout << "current database: " << endl;
+//    database.Print();
 
-    cout << "new database : " << endl;
-    database.Print();
-    cout << endl << endl;
-
+    while(input)
+    {
+        Process(database, input);
+        database.Print();
+        cout << endl << endl << ":";
+        cin.getline(input, 50);
+    }
     return 0;
 }
 
@@ -77,7 +77,10 @@ void Process(list<data>& database, char* input)
     if((FindStr("SET", A[0], 0) != -1) || (FindStr("set", A[0],0) != -1)) // "SET" is found in command
         set(database, A[1], A[2]);
     else if((FindStr("GET*", A[0], 0) != -1) || (FindStr("get*", A[0], 0)!= -1))
+    {
+        cout << "getall()" << endl;
         getall(database);
+    }
     else if((FindStr("GET", A[0], 0) != -1) || (FindStr("get", A[0], 0) != -1))
         get(database, A[1]);
     else
