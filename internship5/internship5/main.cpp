@@ -33,14 +33,16 @@ int main()
     input = NULL;
     cout << ":";
     cin.getline(input, 50);
+//    cin.getline(input, 50);
 
 //    database.InsertHead(newdata);
 //    database.Append(newdata2);
 //    cout << "current database: " << endl;
 //    database.Print();
-
+    cout << "check0" <<endl;
     while(input)
     {
+        cout << "check1" << endl;
         Process(database, input);
         database.Print();
         cout << endl << endl << ":";
