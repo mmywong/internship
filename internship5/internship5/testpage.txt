@@ -1,0 +1,22 @@
+:get*
+-empty-
+:get apple
+-empty-
+:set orange = 4.50
+
+:set banana = 3
+
+:set grapes = outofstock
+
+:get banana
+[banana:3]
+:get*
+[orange:4.50]  [banana:3]  [grapes:outofstock]
+:set grapes = 8
+error : input value is incompatible
+
+:set grapes = instock
+
+:get*
+[orange:4.50]  [banana:3]  [grapes:instock]
+:
