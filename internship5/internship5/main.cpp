@@ -29,25 +29,22 @@ int main()
 //    newdata2.value = "spicy";
 
     list<data> database;
-    char* input;
-    input = NULL;
+    char* input = new char [50];
     cout << ":";
     cin.getline(input, 50);
-//    cin.getline(input, 50);
 
 //    database.InsertHead(newdata);
 //    database.Append(newdata2);
 //    cout << "current database: " << endl;
 //    database.Print();
-    cout << "check0" <<endl;
     while(input)
     {
-        cout << "check1" << endl;
         Process(database, input);
         database.Print();
         cout << endl << endl << ":";
         cin.getline(input, 50);
     }
+    delete [] input;
     return 0;
 }
 
