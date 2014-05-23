@@ -40,8 +40,7 @@ int main()
     while(input)
     {
         Process(database, input);
-        database.Print();
-        cout << endl << endl << ":";
+        cout << endl << ":";
         cin.getline(input, 50);
     }
     delete [] input;
@@ -64,8 +63,6 @@ void Process(list<data>& database, char* input)
           p = strtok(NULL," =");
           i++;
         }
-    cout << endl;
-
     /*
     //***DEBUG*** : to test tokens
 //    cout << "first chop : " << A[0] << endl;
@@ -76,10 +73,7 @@ void Process(list<data>& database, char* input)
     if((FindStr("SET", A[0], 0) != -1) || (FindStr("set", A[0],0) != -1)) // "SET" is found in command
         set(database, A[1], A[2]);
     else if((FindStr("GET*", A[0], 0) != -1) || (FindStr("get*", A[0], 0)!= -1))
-    {
-        cout << "getall()" << endl;
         getall(database);
-    }
     else if((FindStr("GET", A[0], 0) != -1) || (FindStr("get", A[0], 0) != -1))
         get(database, A[1]);
     else
