@@ -11,8 +11,8 @@
 using namespace std;
 
 int whattype(char* newvalue); //detect int/char/string
-void Process(list<data> database, char* input); //take apart input into tokens
-void set(list<data> database, char* propertyname, char* newvalue);
+void Process(list<data> &database, char* input); //take apart input into tokens
+void set(list<data>& database, char* propertyname, char* newvalue);
 
 int main()
 {
@@ -31,7 +31,6 @@ int main()
     char* input;
     cout << ":";
     cin.getline(input, 50);
-    cout << "checkpoint" << endl;
     cout << "input : " << input << endl;
 
     Process(database, input);
@@ -43,7 +42,7 @@ int main()
     return 0;
 }
 
-void Process(list<data> database, char* input)
+void Process(list<data>& database, char* input)
 {
     int i=0;
 
@@ -56,24 +55,21 @@ void Process(list<data> database, char* input)
     while (p != NULL)
         {
           A[i] = p;
-          cout << A[i] << endl;
+          cout << "token " << i << " : " << A[i] << endl;
           p = strtok(NULL," =");
           i++;
         }
     cout << endl;
 
-    cout << "first chop : " << A[0] << endl;
-    cout << "second chop : " << A[1] << endl;
-    cout << "third chop : " << A[2] << endl;
+    /*
+    //***DEBUG*** : to test tokens
+//    cout << "first chop : " << A[0] << endl;
+//    cout << "second chop : " << A[1] << endl;
+//    cout << "third chop : " << A[2] << endl;
+    */
 
-//    cout << "A[0] : " << A[0] << endl;
     if((FindStr("SET", A[0], 0) != -1) || (FindStr("set", A[0],0) != -1)) // "SET" is found in command
-    {
-        cout << "calling function : set(database, name, newvalue);" << endl;
-        cout << "A[1] : " << A[1] << endl;
-        cout << "A[2] : " << A[2] << endl;
         set(database, A[1], A[2]);
-    }
     else if((FindStr("GET*", A[0], 0) != -1) || (FindStr("get*", A[0], 0)!= -1))
         cout << "getall();" << endl;
     else if((FindStr("GET", A[0], 0) != -1) || (FindStr("get", A[0], 0) != -1))
@@ -84,7 +80,7 @@ void Process(list<data> database, char* input)
 }
 
 
-void set(list<data> database, char* propertyname, char* newvalue)
+void set(list<data> &database, char* propertyname, char* newvalue)
 {
     data newdata;
     newdata.propertyname = propertyname;
@@ -101,25 +97,36 @@ void set(list<data> database, char* propertyname, char* newvalue)
     else if(database.Search(newdata) != -1) // found
     {
         Iterator<data> positionfound = database.Ithnode(database.Search(newdata));
-        cout << "what search-iterator is pointing at : " << *positionfound << endl;
-        cout << "database now : ";
-        database.Print();
-        database.InsertBefore(positionfound,newdata);
-        cout << "database now (2) : ";
-        database.Print();
-        cout << "what iterator is pointing at now : " << *positionfound << endl;
 
-        //***DEBUG***//
-        data tester;
-        tester = database.Delete(positionfound);
-        cout << "tester : " << tester << endl;
+        //debug
+        cout << "what iterator(of search result) is pointing at : " << *positionfound << endl;
+        cout << "database before : ";
         database.Print();
+        cout << endl;
+
+        database.InsertBefore(positionfound,newdata);
+
+        //debug
+        cout << "database after insert: ";
+        database.Print();
+        cout << endl;
+//        cout << "what search-iterator is poiting at: " << *positionfound << endl;
+
+        database.Delete(positionfound);
+        cout << "database after delete : ";
+        database.Print();
+        cout << endl;
+        //***DEBUG***//
+//        data tester;
+//        tester = database.Delete(positionfound);
+//        cout << "tester : " << tester << endl;
+//        database.Print();
     }
     //case 3: name does not exist. add this new item
     else
     {
         database.Append(newdata);
-        cout << "supposed to append?" << endl;
+        cout << "supposed to append" << endl;
     }
 }
 

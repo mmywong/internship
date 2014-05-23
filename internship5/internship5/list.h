@@ -166,7 +166,6 @@ node<T>* list<T>::Remove(node<T> *marker)
         walker->next = marker->next; // makes the previous point at the node after marker
     }
     marker->next = NULL;
-    cout << "Inside Remove function, this is value of item being removed : " << marker->item << endl;
     return marker;
 }
 
