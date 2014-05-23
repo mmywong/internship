@@ -13,8 +13,8 @@ using namespace std;
 int whattype(char* newvalue); //detect int/char/string
 void Process(list<data> &database, char* input); //take apart input into tokens
 void set(list<data>& database, char* propertyname, char* newvalue);
-void get(list<data> database, char* propertyname);
-void getall(list<data> database);
+void get(list<data>& database, char* propertyname);
+void getall(list<data>& database);
 
 int main()
 {
@@ -141,16 +141,19 @@ void set(list<data> &database, char* propertyname, char* newvalue)
     }
 }
 
-void get(list<data> database, char* propertyname)
+void get(list<data> &database, char* propertyname)
 {
     data dummydata;
     dummydata.propertyname = propertyname;
 
     Iterator<data> searchptr = database.Ithnode(database.Search(dummydata));
-    cout << "[" << *searchptr << "]";
+    if(searchptr == NULL)
+        cout << "-empty-";
+    else
+        cout << "[" << *searchptr << "]";
 }
 
-void getall(list<data> database)
+void getall(list<data> &database)
 {
     database.Print();
 }
