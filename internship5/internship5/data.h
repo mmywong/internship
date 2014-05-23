@@ -22,7 +22,7 @@ ostream &operator <<(ostream &out, const data& avalue)
 
 bool operator !=(data d1, data d2)
 {
-    if (d1.propertyname == d2.propertyname)
+    if (d1.propertyname != d2.propertyname)
         return true;
     else
         return false;

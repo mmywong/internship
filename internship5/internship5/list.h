@@ -188,6 +188,10 @@ int list<T>::Search(T key)
 {
     int pos = 0;
     node<T>* marker = head;
+    cout << "marker-> item : " << marker->item << endl;
+    cout << "key : " << key << endl;
+    cout << "is item == key?" << (marker->item==key )<< endl;
+    cout << "is item != key?" << (marker->item != key) << endl;
     while((marker != NULL) && (marker->item != key))
     {
         marker = marker->next;
