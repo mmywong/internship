@@ -17,6 +17,13 @@ void getall(list<data>& database);
 
 int main()
 {
+    cout << "#====Command Menu====#" << endl;
+    cout << "set 'name' = 'newvalue' : changes the value of 'name' to 'newvalue'" << endl;
+    cout << "get 'name' : prints out the value of 'name'" << endl;
+    cout << "get* : prints out all the names, as well as their values, in the database" << endl;
+    cout << endl;
+    cout << "**note : variables' values can only be changed to a new value of the same type" << endl << endl;
+
     list<data> database;
     char* input = new char [50];
     cout << ":";
