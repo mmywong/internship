@@ -8,21 +8,15 @@ int StrCmp(char *Ptr1, char *Ptr2);
 void SubStr(char *&main, char *sub, int start, int length);
 int Find(char a, char *iPtr, int startPos);
 int FindStr(char str[], char *iPtr, int startPos); // iPtr is the main array, str[] is the array we want to find
-int FindAny(char charSet[], char s[], int startPos); // FROM CS2. CHANGE TO POINTERS
-int FindNotAny(char charSet[], char s[], int startPos); // CHANGE TO POINTERS
-//void toUpper(char *s); // note: old function from CS2. change to pointer later to keep consistency
-//void toLower(char s[]);
+int FindAny(char charSet[], char s[], int startPos); // from CS2, array ver.
+int FindNotAny(char charSet[], char s[], int startPos); // from CS2, array ver.
 
 void SubStr(char *&main, char *sub, int start, int length) //creates a substring which takes a block of main and puts it into sub, starting from position "start" for a given length
 {
     char *walker;
     walker = main+start;
-
     for(int i=0; i<length; i++)
         *sub++ = *walker++;
-
-//   for (int i=0; i<length; i++)
-//        *(sub+i) = *(main+start+i);
     *sub = NULL;
     main = sub-length; //resets main to the front, so you can print out from the front and do stuff with it later.
 }
@@ -60,10 +54,6 @@ void StrCat(char *&dest, char *source)//concatenates one string to the end of th
 
     delete [] dest;//clear the old dest to make space for new string
     dest = temp;
-
-    /* Old StrCat:
-    dest = dest + StrLen(dest);
-    StrCpy(dest,source); */
 }
 
 void StrCpy(char *dest, char *source)//copies source to dest
@@ -72,13 +62,6 @@ void StrCpy(char *dest, char *source)//copies source to dest
     while(*source)
       *dest++ = *source++;
     *dest = NULL;
-
-//    while(*(source+i) != NULL)
-//    {
-//        *(dest+i) = *(source+i);
-//        i++;
-//    }
-//    *(dest+i) = NULL;
 }
 
 int FindStr(char str[], char *iPtr, int startPos) // finds a string str within a string iPtr
@@ -112,15 +95,10 @@ int FindStr(char str[], char *iPtr, int startPos) // finds a string str within a
 int FindAny(char charSet[], char s[], int startPos)
 {
     int i= startPos;
-//    cout << strLen(s)<<endl;
-
     while(s[i] != '\0')
     {
         if(Find(s[i], charSet, 0) != -1)
-        {
-//          cout << "i: " << i << endl;
             return i;
-        }
         else
             i++;
     }
@@ -161,150 +139,5 @@ int StrLen(char *iPtr)
          index++;
     return index;
 }
-/*
-//void toUpper(char* s)
-{
-    int i=0;
-
-    while(*(s+i) != '\0')
-    {
-        switch(*(s+i))
-        {
-            case 'a':
-            case 'b':
-            case 'c':
-            case 'd':
-            case 'e':
-            case 'f':
-            case 'g':
-            case 'h':
-            case 'i':
-            case 'j':
-            case 'k':
-            case 'l':
-            case 'm':
-            case 'n':
-            case 'o':
-            case 'p':
-            case 'q':
-            case 'r':
-            case 's':
-            case 't':
-            case 'u':
-            case 'v':
-            case 'w':
-            case 'x':
-            case 'y':
-            case 'z':
-
-                *(s+i)-=32;
-                i++;
-                break;
-            case 'A':
-            case 'B':
-            case 'C':
-            case 'D':
-            case 'E':
-            case 'F':
-            case 'G':
-            case 'H':
-            case 'I':
-            case 'J':
-            case 'K':
-            case 'L':
-            case 'M':
-            case 'N':
-            case 'O':
-            case 'P':
-            case 'Q':
-            case 'R':
-            case 'S':
-            case 'T':
-            case 'U':
-            case 'V':
-            case 'W':
-            case 'X':
-            case 'Y':
-            case 'Z':
-            case ' ':
-                i++;
-                break;
-            }
-        }
-}
-
-//10: To Lower
-void toLower(char *s)
-{
-    int i=0;
-
-    while(*(s+i) != '\0')
-    {
-        switch(*(s+i))
-        {
-            case 'a':
-            case 'b':
-            case 'c':
-            case 'd':
-            case 'e':
-            case 'f':
-            case 'g':
-            case 'h':
-            case 'i':
-            case 'j':
-            case 'k':
-            case 'l':
-            case 'm':
-            case 'n':
-            case 'o':
-            case 'p':
-            case 'q':
-            case 'r':
-            case 's':
-            case 't':
-            case 'u':
-            case 'v':
-            case 'w':
-            case 'x':
-            case 'y':
-            case 'z':
-            case ' ':
-                i++;
-                break;
-            case 'A':
-            case 'B':
-            case 'C':
-            case 'D':
-            case 'E':
-            case 'F':
-            case 'G':
-            case 'H':
-            case 'I':
-            case 'J':
-            case 'K':
-            case 'L':
-            case 'M':
-            case 'N':
-            case 'O':
-            case 'P':
-            case 'Q':
-            case 'R':
-            case 'S':
-            case 'T':
-            case 'U':
-            case 'V':
-            case 'W':
-            case 'X':
-            case 'Y':
-            case 'Z':
-                *(s+i)+=32;
-                i++;
-                break;
-            }
-    }
-}*/
-
-
-
 
 #endif // STRINGFX_H

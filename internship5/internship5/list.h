@@ -39,11 +39,11 @@ public:
     void Reverse                    ();
 
     //---markers---//
-    Iterator<T> Begin                  ();
-    Iterator<T> End                    ();
-    Iterator<T> Ithnode                (int i);
-    int IthElement                     (); // returns the item of IthNode
-    bool isEmpty                        ();
+    Iterator<T> Begin               ();
+    Iterator<T> End                 ();
+    Iterator<T> Ithnode             (int i);
+    int IthElement                  (); // returns the item of IthNode
+    bool isEmpty                    ();
 
 private:
     void InsertAfter                (node<T>* marker, T num); // makes a node to the right of marker's node
@@ -51,11 +51,9 @@ private:
     T Delete                        (node<T>* marker);
     node<T>* Remove                 (node<T>* marker);
     node<T>* nEnd                   ();
-
     node<T>* head;
 };
 
-//=============functions==============//
 //---constructor---//
 template <class T>
 list<T>::list()
@@ -64,7 +62,6 @@ list<T>::list()
 }
 
 //---big three---//
-//memory leak as well
 template <class T>
 list<T>::list(list<T> &copythis)
 {
@@ -294,7 +291,6 @@ void list<T>::InsertBefore(node<T> *marker, T num)
         node<T>* temp = new node<T>;
         node<T>* walker = head;
         temp->item = num;
-
         while((walker->next != marker) && (walker->next != NULL))
             walker = walker->next;
         temp->next = walker->next;

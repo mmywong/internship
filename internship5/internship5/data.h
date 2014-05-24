@@ -9,9 +9,9 @@ struct data{
     string value;
     int type; // int/char/double/other
 
-    friend ostream& operator <<(ostream& out, const data& avalue);
-    friend bool operator !=(data d1, data d2); // NOTE: checks only for their names, not their data
-    friend bool operator ==(data d1, data d2); // NOTE: checks only for their names, not their data
+    friend ostream& operator <<     (ostream& out, const data& avalue);
+    friend bool operator !=         (data d1, data d2); // NOTE: checks only for their names, not their data
+    friend bool operator ==         (data d1, data d2); // NOTE: checks only for their names, not their data
 };
 
 ostream &operator <<(ostream &out, const data& avalue)
